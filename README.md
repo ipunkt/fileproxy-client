@@ -95,3 +95,14 @@ $fileproxy->alias()->delete($aliasId);// $aliasId = "${reference}.${alias}"
 ```
 
 Alias was deleted when no exception was thrown.
+
+### Statistics resource
+
+#### Requesting statistics
+
+```php
+/** @var \Ipunkt\Fileproxy\Entities\Statistic $stats */
+$stats = $fileproxy->statistics()->stats();
+```
+
+`$stats` returns the main statistics for the current service: size in bytes, file and alias count serving and hits summarized.

@@ -6,6 +6,7 @@ use Guzzle\Http\ClientInterface;
 use Ipunkt\Fileproxy\Resources\AliasesResource;
 use Ipunkt\Fileproxy\Resources\FileAliasesResource;
 use Ipunkt\Fileproxy\Resources\FilesResource;
+use Ipunkt\Fileproxy\Resources\StatisticsResource;
 
 class FileproxyClient
 {
@@ -33,6 +34,11 @@ class FileproxyClient
      * @var AliasesResource
      */
     private $aliasResource;
+
+    /**
+     * @var StatisticsResource
+     */
+    private $statisticsResource;
 
     /**
      * FileproxyClient constructor.
@@ -89,6 +95,19 @@ class FileproxyClient
             $this->aliasResource = new AliasesResource($this->client(), $this->host);
         }
         return $this->aliasResource;
+    }
+
+    /**
+     * statistics resource
+     *
+     * @return StatisticsResource
+     */
+    public function statistics()
+    {
+        if ($this->statisticsResource === null) {
+            $this->statisticsResource = new StatisticsResource($this->client(), $this->host);
+        }
+        return $this->statisticsResource;
     }
 
     /**
