@@ -57,9 +57,9 @@ $file = $fileproxy->files()->get($reference);// $reference is a UUID4
 
 ### FileAlias resource
 
-#### Creating an alias
-
 You can create or retrieve aliases with this resource.
+
+#### Creating an alias
 
 ```php
 /** @var \Ipunkt\Fileproxy\Entities\Alias $alias */
