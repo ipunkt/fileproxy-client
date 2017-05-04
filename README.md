@@ -1,6 +1,14 @@
 # fileproxy-client
+
+[![Latest Stable Version](https://poser.pugx.org/ipunkt/fileproxy-client/v/stable.svg)](https://packagist.org/packages/ipunkt/fileproxy-client) [![Latest Unstable Version](https://poser.pugx.org/ipunkt/fileproxy-client/v/unstable.svg)](https://packagist.org/packages/ipunkt/fileproxy-client) [![License](https://poser.pugx.org/ipunkt/fileproxy-client/license.svg)](https://packagist.org/packages/ipunkt/fileproxy-client) [![Total Downloads](https://poser.pugx.org/ipunkt/fileproxy-client/downloads.svg)](https://packagist.org/packages/ipunkt/fileproxy-client)
+
 A client library for fileproxy
 
+## Quickstart
+
+```
+composer require ipunkt/fileproxy-client
+```
 
 ## Usage
 
