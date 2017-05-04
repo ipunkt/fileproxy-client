@@ -38,7 +38,7 @@ $file = $fileproxy->files()->store($fileToUpload);
 #### Storing a remote file
 
 ```php
-$url = 'https://domain.tld/images/picutre.jpg';
+$url = 'https://domain.tld/images/picture.jpg';
 
 /** @var \Ipunkt\Fileproxy\Entities\File $file */
 $file = $fileproxy->files()->storeRemote($url);
