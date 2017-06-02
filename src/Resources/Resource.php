@@ -97,6 +97,26 @@ abstract class Resource
     }
 
     /**
+     * puts a message
+     *
+     * @param string|integer $id
+     * @param array $data
+     * @param array $headers
+     * @return \Guzzle\Http\Message\Response
+     * @throws \Guzzle\Http\Exception\RequestException
+     */
+    protected function _put($id, $data, array $headers = array())
+    {
+        $request = $this->client->put(
+            $this->url($this->baseUrl) . '/' . $id,
+            $this->prepareHeaders($headers),
+            $this->prepareBody($data)
+        );
+
+        return $request->send();
+    }
+
+    /**
      * deletes a resource
      *
      * @param string|integer $id

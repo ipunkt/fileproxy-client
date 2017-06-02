@@ -57,6 +57,19 @@ $file = $fileproxy->files()->store($fileToUpload);
 
 `$file` is a File entity with the main information about the file itself - the reference.
 
+#### Updating an uploaded file
+
+```php
+$reference = 'UUID-FROM-LOCAL-STORAGE';
+$fileToUpload = new \SplFileInfo('/absolute/file/path.ext');
+
+/** @var \Ipunkt\Fileproxy\Entities\File $file */
+$file = $fileproxy->files()->update($reference, $fileToUpload);
+```
+
+`$file` is a File entity with the main information about the file itself - the reference.
+
+
 #### Storing a remote file
 
 ```php
@@ -64,6 +77,18 @@ $url = 'https://domain.tld/images/picture.jpg';
 
 /** @var \Ipunkt\Fileproxy\Entities\File $file */
 $file = $fileproxy->files()->storeRemote($url);
+```
+
+`$file` is a File entity with the main information about the file itself - the reference.
+
+#### Updating a stored remote file
+
+```php
+$reference = 'UUID-FROM-LOCAL-STORAGE';
+$url = 'https://domain.tld/images/picture.jpg';
+
+/** @var \Ipunkt\Fileproxy\Entities\File $file */
+$file = $fileproxy->files()->updateRemote($reference, $url);
 ```
 
 `$file` is a File entity with the main information about the file itself - the reference.

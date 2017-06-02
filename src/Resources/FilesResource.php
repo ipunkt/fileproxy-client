@@ -55,6 +55,55 @@ class FilesResource extends Resource
     }
 
     /**
+     * updates a single file resource
+     *
+     * @param string $reference
+     * @param \SplFileInfo $file
+     * @return File
+     * @throws \Guzzle\Common\Exception\RuntimeException
+     * @throws \Guzzle\Http\Exception\RequestException
+     * @throws ApiResponseException
+     */
+    public function update($reference, \SplFileInfo $file)
+    {
+        $response = $this->_put($reference, $this->createRequestModel('files', array(
+            'type' => 'attachment',
+            'source' => base64_encode($file->openFile()->fread($file->getSize())),
+            'filename' => $file->getBasename(),
+        )));
+
+        if ($response->getStatusCode() === 201) {
+            return File::fromResponse($response);
+        }
+
+        throw ApiResponseException::fromErrorResponse($response);
+    }
+
+    /**
+     * update a remote url as proxy file
+     *
+     * @param string $reference
+     * @param string $url
+     * @return File
+     * @throws \Guzzle\Common\Exception\RuntimeException
+     * @throws \Guzzle\Http\Exception\RequestException
+     * @throws ApiResponseException
+     */
+    public function updateRemote($reference, $url)
+    {
+        $response = $this->_put($reference, $this->createRequestModel('files', array(
+            'type' => 'uri',
+            'source' => $url,
+        )));
+
+        if ($response->getStatusCode() === 201) {
+            return File::fromResponse($response);
+        }
+
+        throw ApiResponseException::fromErrorResponse($response);
+    }
+
+    /**
      * returns a single files resource
      *
      * @param string $reference
