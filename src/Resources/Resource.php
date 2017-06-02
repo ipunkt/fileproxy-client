@@ -17,14 +17,21 @@ abstract class Resource
     private $baseUrl;
 
     /**
+     * @var array
+     */
+    private $headers;
+
+    /**
      * Resource constructor.
      * @param ClientInterface $client
      * @param string $baseUrl
+     * @param array $headers
      */
-    public function __construct(ClientInterface $client, $baseUrl)
+    public function __construct(ClientInterface $client, $baseUrl, array $headers = array())
     {
         $this->client = $client;
         $this->baseUrl = $baseUrl;
+        $this->headers = $headers;
     }
 
     /**
@@ -152,6 +159,6 @@ abstract class Resource
         $headers['Accept'] = 'application/vnd.api+json';
         $headers['Content-Type'] = 'application/vnd.api+json';
 
-        return $headers;
+        return array_merge($this->headers, $headers);
     }
 }

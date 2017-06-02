@@ -41,6 +41,11 @@ class FileproxyClient
     private $statisticsResource;
 
     /**
+     * @var array
+     */
+    private $headers = array();
+
+    /**
      * FileproxyClient constructor.
      * @param string $host
      * @param ClientInterface $client
@@ -53,6 +58,41 @@ class FileproxyClient
     }
 
     /**
+     * set credentials for requesting the api
+     *
+     * @param string $secretToken
+     * @param null|string $secretHeaderName
+     * @return $this
+     */
+    public function setCredentials($secretToken, $secretHeaderName = null)
+    {
+        if (isset($this->headers['X-FILEPROXY-TOKEN'])) {
+            unset($this->headers['X-FILEPROXY-TOKEN']);
+        }
+
+        if ($secretHeaderName === null) {
+            $secretHeaderName = 'X-FILEPROXY-TOKEN';
+        }
+        $this->addHeader($secretHeaderName, $secretToken);
+
+        return $this;
+    }
+
+    /**
+     * adds a header for each resource request
+     *
+     * @param string $name
+     * @param string $value
+     * @return $this
+     */
+    public function addHeader($name, $value)
+    {
+        $this->headers[$name] = $value;
+
+        return $this;
+    }
+
+    /**
      * files resource
      *
      * @return FilesResource
@@ -60,7 +100,7 @@ class FileproxyClient
     public function files()
     {
         if ($this->filesResource === null) {
-            $this->filesResource = new FilesResource($this->client(), $this->host);
+            $this->filesResource = new FilesResource($this->client(), $this->host, $this->headers);
         }
         return $this->filesResource;
     }
@@ -74,7 +114,7 @@ class FileproxyClient
     public function fileAliases($reference = null)
     {
         if ($this->fileAliasesResource === null) {
-            $this->fileAliasesResource = new FileAliasesResource($this->client(), $this->host);
+            $this->fileAliasesResource = new FileAliasesResource($this->client(), $this->host, $this->headers);
         }
 
         if ($reference !== null) {
@@ -92,7 +132,7 @@ class FileproxyClient
     public function alias()
     {
         if ($this->aliasResource === null) {
-            $this->aliasResource = new AliasesResource($this->client(), $this->host);
+            $this->aliasResource = new AliasesResource($this->client(), $this->host, $this->headers);
         }
         return $this->aliasResource;
     }
@@ -105,7 +145,7 @@ class FileproxyClient
     public function statistics()
     {
         if ($this->statisticsResource === null) {
-            $this->statisticsResource = new StatisticsResource($this->client(), $this->host);
+            $this->statisticsResource = new StatisticsResource($this->client(), $this->host, $this->headers);
         }
         return $this->statisticsResource;
     }

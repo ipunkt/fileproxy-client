@@ -20,6 +20,28 @@ $client = new \Guzzle\Http\Client();
 $fileproxy = new \Ipunkt\Fileproxy\FileproxyClient('https://file-proxy.app', $client);
 ```
 
+### Setting Credentials
+
+After version 1.0.0 the fileproxy has the ability to protect api calls with a secret token header. You can add that to the client like so
+ 
+```php
+$fileproxy->setCredentials('S3cr3T');
+```
+ 
+Or, you can configure another header name than the default one:
+```php
+$fileproxy->setCredentials('S3cr3T', 'X-ANOTHER-SECURITY-TOKEN-NAME');
+```
+
+### Setting Headers
+
+Another security level can be added by adding custom http headers for each request. So your infrastructure can verify the request by parsing them. You can achieve this like so:
+
+```php
+$fileproxy->addHeader('X-HEADER', 'custom value');
+```
+
+
 ### Files resource
 
 Files resource handles all stuff with the related proxy files. These files are the source for the aliases provided by the service.
