@@ -22,7 +22,7 @@ $fileproxy = new \Ipunkt\Fileproxy\FileproxyClient('https://file-proxy.app', $cl
 
 ### Setting Credentials
 
-After version 1.0.0 the fileproxy has the ability to protect api calls with a secret token header. You can add that to the client like so
+Since version 1.1.0 the fileproxy has the ability to protect api calls with a secret token header. You can add that to the client like so
  
 ```php
 $fileproxy->setCredentials('S3cr3T');
