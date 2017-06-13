@@ -20,7 +20,7 @@ class FilesResource extends Resource
     {
         $response = $this->_post($this->createRequestModel('files', array(
             'type' => 'attachment',
-            'source' => base64_encode($file->openFile()->fread($file->getSize())),
+            'source' => base64_encode(file_get_contents($file->getRealPath())),
             'filename' => $file->getBasename(),
         )));
 
@@ -68,7 +68,7 @@ class FilesResource extends Resource
     {
         $response = $this->_put($reference, $this->createRequestModel('files', array(
             'type' => 'attachment',
-            'source' => base64_encode($file->openFile()->fread($file->getSize())),
+            'source' => base64_encode(file_get_contents($file->getRealPath())),
             'filename' => $file->getBasename(),
         )));
 
