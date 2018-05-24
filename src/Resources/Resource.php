@@ -2,8 +2,7 @@
 
 namespace Ipunkt\Fileproxy\Resources;
 
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Psr7\Request;
+use Guzzle\Http\ClientInterface;
 
 abstract class Resource
 {
@@ -43,96 +42,96 @@ abstract class Resource
      */
     abstract protected function url($baseUrl);
 
-	/**
-	 * returns an resource index via get
-	 *
-	 * @param array $headers
-	 * @return \Psr\Http\Message\ResponseInterface
-	 * @throws \GuzzleHttp\Exception\GuzzleException
-	 */
+    /**
+     * returns an resource index via get
+     *
+     * @param array $headers
+     * @return \Guzzle\Http\Message\Response
+     * @throws \Guzzle\Http\Exception\RequestException
+     */
     protected function _index(array $headers = array())
     {
-    	$request = new Request('GET',
+        $request = $this->client->get(
             $this->url($this->baseUrl),
             $this->prepareHeaders($headers)
         );
 
-        return $this->client->send($request);
+        return $request->send();
     }
 
-	/**
-	 * returns a single resource via get
-	 *
-	 * @param string|integer $id
-	 * @param array $headers
-	 * @return \Psr\Http\Message\ResponseInterface
-	 * @throws \GuzzleHttp\Exception\GuzzleException
-	 */
+    /**
+     * returns a single resource via get
+     *
+     * @param string|integer $id
+     * @param array $headers
+     * @return \Guzzle\Http\Message\Response
+     * @throws \Guzzle\Http\Exception\RequestException
+     */
     protected function _get($id, array $headers = array())
     {
-        $request = new Request('GET',
+        $request = $this->client->get(
             $this->url($this->baseUrl) . '/' . $id,
             $this->prepareHeaders($headers)
         );
 
-        return $this->client->send($request);
+        return $request->send();
     }
 
-	/**
-	 * posts a message
-	 *
-	 * @param array $data
-	 * @param array $headers
-	 * @return \Psr\Http\Message\ResponseInterface
-	 * @throws \GuzzleHttp\Exception\GuzzleException
-	 */
+    /**
+     * posts a message
+     *
+     * @param array $data
+     * @param array $headers
+     * @return \Guzzle\Http\Message\Response
+     * @throws \Guzzle\Http\Exception\RequestException
+     */
     protected function _post($data, array $headers = array())
     {
-        $request = new Request('POST',
+        $request = $this->client->post(
             $this->url($this->baseUrl),
             $this->prepareHeaders($headers),
             $this->prepareBody($data)
         );
 
-        return $this->client->send($request);
+        return $request->send();
     }
 
-	/**
-	 * puts a message
-	 *
-	 * @param string|integer $id
-	 * @param array $data
-	 * @param array $headers
-	 * @return \Psr\Http\Message\ResponseInterface
-	 * @throws \GuzzleHttp\Exception\GuzzleException
-	 */
+    /**
+     * puts a message
+     *
+     * @param string|integer $id
+     * @param array $data
+     * @param array $headers
+     * @return \Guzzle\Http\Message\Response
+     * @throws \Guzzle\Http\Exception\RequestException
+     */
     protected function _put($id, $data, array $headers = array())
     {
-        $request = new Request('PUT',
+        $request = $this->client->put(
             $this->url($this->baseUrl) . '/' . $id,
             $this->prepareHeaders($headers),
             $this->prepareBody($data)
         );
 
-        return $this->client->send($request);
+        return $request->send();
     }
 
-	/**
-	 * deletes a resource
-	 *
-	 * @param string|integer $id
-	 * @param array $headers
-	 * @return \Psr\Http\Message\ResponseInterface
-	 * @throws \GuzzleHttp\Exception\GuzzleException
-	 */
+    /**
+     * deletes a resource
+     *
+     * @param string|integer $id
+     * @param array $headers
+     * @return \Guzzle\Http\Message\Response
+     * @throws \Guzzle\Http\Exception\RequestException
+     */
     protected function _delete($id, array $headers = array())
     {
-        $request = new Request('DELETE',
+        $request = $this->client->delete(
             $this->url($this->baseUrl) . '/' . $id,
             $this->prepareHeaders($headers)
         );
 
-        return $this->client->send($request);
+        return $request->send();
     }
 
     /**

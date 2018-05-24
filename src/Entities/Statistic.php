@@ -2,7 +2,7 @@
 
 namespace Ipunkt\Fileproxy\Entities;
 
-use Psr\Http\Message\ResponseInterface;
+use Guzzle\Http\Message\Response;
 
 class Statistic
 {
@@ -38,15 +38,16 @@ class Statistic
         $this->hits = $hits;
     }
 
-	/**
-	 * returns file entity from api response
-	 *
-	 * @param ResponseInterface $response
-	 * @return static
-	 */
-    public static function fromResponse(ResponseInterface $response)
+    /**
+     * returns file entity from api response
+     *
+     * @param Response $response
+     * @return static
+     * @throws \Guzzle\Common\Exception\RuntimeException
+     */
+    public static function fromResponse(Response $response)
     {
-        $data = json_decode( $response->getBody(), true );
+        $data = $response->json();
 
         $size = array_get($data, 'data.attributes.size', 0);
         $files = array_get($data, 'data.attributes.files', 0);

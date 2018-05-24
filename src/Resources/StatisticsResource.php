@@ -7,12 +7,14 @@ use Ipunkt\Fileproxy\Exceptions\ApiResponseException;
 
 class StatisticsResource extends Resource
 {
-	/**
-	 * returns service statistics
-	 *
-	 * @return Statistic
-	 * @throws \GuzzleHttp\Exception\GuzzleException
-	 */
+    /**
+     * returns service statistics
+     *
+     * @return Statistic
+     * @throws \Guzzle\Common\Exception\RuntimeException
+     * @throws \Guzzle\Http\Exception\RequestException
+     * @throws ApiResponseException
+     */
     public function stats()
     {
         $response = $this->_index();

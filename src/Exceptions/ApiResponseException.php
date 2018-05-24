@@ -2,13 +2,14 @@
 
 namespace Ipunkt\Fileproxy\Exceptions;
 
-use Psr\Http\Message\ResponseInterface;
+use Guzzle\Common\Exception\RuntimeException;
+use Guzzle\Http\Message\Response;
 
-class ApiResponseException extends \RuntimeException
+class ApiResponseException extends RuntimeException
 {
-    public static function fromErrorResponse(ResponseInterface $response)
+    public static function fromErrorResponse(Response $response)
     {
-        $data = json_decode( $response->getBody(), true );
+        $data = $response->json();
 
         $errors = array_get($data, 'errors', array());
 
