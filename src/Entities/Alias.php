@@ -2,7 +2,7 @@
 
 namespace Ipunkt\Fileproxy\Entities;
 
-use Guzzle\Http\Message\Response;
+use Psr\Http\Message\ResponseInterface;
 
 class Alias
 {
@@ -62,16 +62,15 @@ class Alias
         $this->download = $download;
     }
 
-    /**
-     * returns file entity from api response
-     *
-     * @param Response $response
-     * @return static
-     * @throws \Guzzle\Common\Exception\RuntimeException
-     */
-    public static function fromResponse(Response $response)
+	/**
+	 * returns file entity from api response
+	 *
+	 * @param ResponseInterface $response
+	 * @return static
+	 */
+    public static function fromResponse(ResponseInterface $response)
     {
-        $data = $response->json();
+        $data = json_decode( $response->getBody(), true );
 
         $id = array_get($data, 'data.id');
         $path = array_get($data, 'data.attributes.path');
@@ -87,16 +86,15 @@ class Alias
         return new static($id, $path, $validFrom, $validUntil, $hits, $hitsLeft, $hitsTotal, $download);
     }
 
-    /**
-     * returns a list of Alias instances from response
-     *
-     * @param Response $response
-     * @return array|Alias[]
-     * @throws \Guzzle\Common\Exception\RuntimeException
-     */
-    public static function listFromResponse(Response $response)
+	/**
+	 * returns a list of Alias instances from response
+	 *
+	 * @param ResponseInterface $response
+	 * @return array|Alias[]
+	 */
+    public static function listFromResponse(ResponseInterface $response)
     {
-        $data = $response->json();
+        $data = json_decode( $response->getBody(), true );
         $list = array_get($data, 'data', array());
         if (!is_array($list)) {
             $list = array();

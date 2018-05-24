@@ -27,18 +27,17 @@ class FileAliasesResource extends Resource
         return $this;
     }
 
-    /**
-     * creates an alias
-     *
-     * @param string $path
-     * @param int $hits
-     * @param DateTime|null $validFrom
-     * @param DateTime|null $validUntil
-     * @return Alias
-     * @throws \Guzzle\Common\Exception\RuntimeException
-     * @throws \Guzzle\Http\Exception\RequestException
-     * @throws ApiResponseException
-     */
+	/**
+	 * creates an alias
+	 *
+	 * @param string $path
+	 * @param int $hits
+	 * @param DateTime|null $validFrom
+	 * @param DateTime|null $validUntil
+	 * @return Alias
+	 * @throws ApiResponseException
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
     public function create($path, $hits = 0, $validFrom = null, $validUntil = null)
     {
         $validFrom = $validFrom instanceof DateTime ? $validFrom->format(DateTime::ATOM) : null;
@@ -58,14 +57,12 @@ class FileAliasesResource extends Resource
         throw ApiResponseException::fromErrorResponse($response);
     }
 
-    /**
-     * returns all aliases found
-     *
-     * @return array|Alias[]
-     * @throws \Guzzle\Common\Exception\RuntimeException
-     * @throws \Guzzle\Http\Exception\RequestException
-     * @throws ApiResponseException
-     */
+	/**
+	 * returns all aliases found
+	 *
+	 * @return array|Alias[]
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
     public function all()
     {
         $response = $this->_index();

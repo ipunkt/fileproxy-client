@@ -2,7 +2,7 @@
 
 namespace Ipunkt\Fileproxy;
 
-use Guzzle\Http\ClientInterface;
+use GuzzleHttp\ClientInterface;
 use Ipunkt\Fileproxy\Resources\AliasesResource;
 use Ipunkt\Fileproxy\Resources\FileAliasesResource;
 use Ipunkt\Fileproxy\Resources\FilesResource;
@@ -49,11 +49,12 @@ class FileproxyClient
      * FileproxyClient constructor.
      * @param string $host
      * @param ClientInterface $client
+     *
+     * @FIXME setBaseUrl was removed. ClientInterface needs to be created with the $host parameter. Mention in readme.md
      */
     public function __construct($host, ClientInterface $client)
     {
         $this->client = $client;
-        $this->client->setBaseUrl($host);
         $this->host = rtrim($host, '/') . '/';
     }
 

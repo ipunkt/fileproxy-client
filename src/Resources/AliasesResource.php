@@ -7,15 +7,14 @@ use Ipunkt\Fileproxy\Exceptions\ApiResponseException;
 
 class AliasesResource extends Resource
 {
-    /**
-     * returns a single alias by combined alias id
-     *
-     * @param string $aliasId
-     * @return Alias
-     * @throws \Guzzle\Http\Exception\RequestException
-     * @throws \Guzzle\Common\Exception\RuntimeException
-     * @throws ApiResponseException
-     */
+	/**
+	 * returns a single alias by combined alias id
+	 *
+	 * @param string $aliasId
+	 * @return Alias
+	 * @throws ApiResponseException
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
     public function get($aliasId)
     {
         $response = $this->_get($aliasId);
@@ -27,14 +26,14 @@ class AliasesResource extends Resource
         throw ApiResponseException::fromErrorResponse($response);
     }
 
-    /**
-     * deletes an alias
-     *
-     * @param string $aliasId
-     * @return bool
-     * @throws \Guzzle\Http\Exception\RequestException
-     * @throws ApiResponseException
-     */
+	/**
+	 * deletes an alias
+	 *
+	 * @param string $aliasId
+	 * @return bool
+	 * @throws ApiResponseException
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
     public function delete($aliasId)
     {
         $response = $this->_delete($aliasId);

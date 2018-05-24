@@ -3,8 +3,7 @@
     "description": "Client library for fileproxy application",
     "type": "library",
     "require": {
-	    "php": ">=5.3.2",
-        "guzzlehttp/guzzle": "3.7.3"
+        "guzzlehttp/guzzle": "~6"
     },
 	"autoload": {
 		"psr-4": {
